@@ -6,6 +6,7 @@ step3->npm init -y
 step4->open folder in vs code 
 step5-> npm i express.
 step6->create server.js
+step7-> run server == node server.js (folder_name)
 
 =======
 step by step create a server in express
