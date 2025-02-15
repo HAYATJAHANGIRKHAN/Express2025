@@ -1,13 +1,18 @@
 // Express Import
 const express = require('express');
 const app = express();
+//used to parse req.body in express -> PUT OR  POST
+const bodyParser = require('body-parser');
 
-//  Body Parser Middleware (Use express.json() instead of bodyParser)
-app.use(express.json()); 
+// Middleware (For JSON Parsing)
+// app.use(express.json()); 
+// specifically parse JSON data & add it to the request.body object
+application.use(bodyParser.json());
 
-// Server Start
+
+// Server Start on this port
 app.listen(3000, () => {
-    console.log(' Server is running on port 3000');
+    console.log('Server is running on port 3000');
 });
 
 // Routes
@@ -16,30 +21,38 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.send('mohd sulaiman')
+    res.send('mohd sulaiman');
 });
 
 app.get('/contact', (req, res) => {
-    res.send('mohd sulaiman 0300-1234567')
+    res.send('mohd sulaiman 0300-1234567');
 });
 
-// POST Route (Fixed)
+
 app.post('/api/cars', (req, res) => {
-    console.log("Received Data:", req.body);  // Debugging ke liye print karo
+    const { name, brand } = req.body;  
+    console.log(name);
+    console.log(brand);
+    res.send("Car submitted successfully");
+});
+
+
+    // {
+    // console.log("Received Data:", req.body);  // Debugging ke liye print karo
 
     // Check if req.body is empty
-    if (!req.body || Object.keys(req.body).length === 0) {
-        return res.status(400).json({ error: "Request body is empty or invalid" });
-    }
+//     if (!req.body || Object.keys(req.body).length === 0) {
+//         return res.status(400).json({ error: "Request body is empty or invalid" });
+//     }
 
-    // Destructure safely
-    const { name, brand } = req.body;
-    if (!name || !brand) {
-        return res.status(400).json({ error: "Missing name or brand" });
-    }
+//     // Destructure safely
+//     const { name, brand } = req.body;
+//     if (!name || !brand) {
+//         return res.status(400).json({ error: "Missing name or brand" });
+//     }
 
-    res.json({ message: `Car added: ${name} of brand ${brand}` });
-});
+//     res.json({ message: `Car added: ${name} of brand ${brand}` });
+// });
 
 
 const mongoose = require('mongoose');
